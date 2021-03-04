@@ -1,0 +1,50 @@
+###WORK IN PROGRESS###
+
+-search charity
+-search campaign
+-create campaign
+-donate
+
+-identification
+-roundup or donation balance
+-roundup on transaction
+
+GET /charities
+return list of charities, one-to-one copy of external api
+
+POST /users
+Create user with name and money
+
+GET /campaign/
+
+POST /campaign
+Create new campaign
+- total amount
+- raised amount
+- [users]
+- charity 
+
+UPDATE /campaign
+
+
+### transactions in separate controller
+
+POST /transaction
+- amount
+- user
+
+GET /donation:id
+
+POST /donation
+
+GET /roundup
+
+POST /roundup
+
+
+### Charity endpoints
+
+GET /charities (filters: name, category, location(city, province))
+GET /charity/:charity_id   (drill down on specific charity)
+
+GET /charities/categories (get a list of categories. Need filters?)
