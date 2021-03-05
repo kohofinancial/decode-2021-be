@@ -58,7 +58,7 @@ const getDonationSum = async(id) => {
   return User.findById(id, 'transactions').populate('transactions').then((collection) => {
     let cumulativeSum = 0;    
 
-    collection.transactions.filter(transaction => transaction.type == 'roundup').forEach(transaction => cumulativeSum += transaction.amount);
+    collection.transactions.filter(transaction => transaction.type == 'roundup' || transaction.type == 'donation').forEach(transaction => cumulativeSum += transaction.amount);
 
     return cumulativeSum;
   })
