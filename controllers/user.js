@@ -21,7 +21,7 @@ const GET = (req, res) => {
 }
 
 const POST = (req, res) => {
-    createUser(req.body.name, req.body.balance, 0)
+    createUser(req.body.name, 100, 0)
     .then((user) => {
         getDonationSum(user._id).then((value) => {
             user.totalDonated=value   
