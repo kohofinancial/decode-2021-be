@@ -1,5 +1,7 @@
 name: Deploy
-environment: main
+
+environment:
+  name: main
 
 on:
   push:
