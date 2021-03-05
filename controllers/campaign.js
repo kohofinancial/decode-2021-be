@@ -9,22 +9,29 @@ const GET = (req, res) => {
     return [];
 
   let campaign = getCampaignByID(id);
-  if(campaign)
+
+
+  getCampaignByID(id).then((campaign) => {
+    res.status(200);  
     res.send(JSON.stringify(campaign));
-  res.send({error: "Campaign not found."});
+  })
+  .catch(e => {
+    res.status(500);
+    res.send(e);
+  });
+
+
 }
 
 const POST = (req, res) => {
   createCampaign(req.body.name, req.body.goalAmount, req.body.userId)
   .then((campaign) => {
-      console.log(campaign)
-      addCampaign(req.body.userId, campaign)
-      res.status(200);
-      res.send("succeeded");
+    res.status(200);
+    res.send(campaign);
   })
   .catch(e => {
-      res.status(500);
-      res.send(e);
+    res.status(500);
+    res.send(e);
   });
 
 }

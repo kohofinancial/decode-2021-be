@@ -5,10 +5,11 @@ const getAllCampaigns = async() => {
 }
 
 const getCampaignByID = async(id) => {
-  let res = await Campaign.find({_id: id});
-  if(res.length)
-    return res;
-  return;
+  return Campaign.findById(id);
+}
+
+const getCampaignByUserID = async(id) => {
+  return Campaign.find({ userIds: id });
 }
 
 const createCampaign = async(name, goalAmount, userId) => {
@@ -24,7 +25,21 @@ const createCampaign = async(name, goalAmount, userId) => {
   return campaign.save();
 }
 
+const addTransactionToCampaign = async(id, transaction) => {
+  console.log("id_:"+id)
+  console.log("transaction_:" + transaction)
+  Campaign.findOne({_id: id}).populate("transactions").then((campaignToUpdate) => {
+    campaignToUpdate.currentAmount += transaction.amount;
+    campaignToUpdate.transactions.push(transaction);
+    campaignToUpdate.save();
+  });
+}
+
 module.exports = {
-  getAllCampaigns, getCampaignByID, createCampaign
+  getAllCampaigns,
+  getCampaignByUserID,
+  getCampaignByID,
+  createCampaign,
+  addTransactionToCampaign,
 }
 

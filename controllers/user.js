@@ -1,13 +1,20 @@
-const { getUserByName, createUser } = require('../db/user.js')
+const { getUserById, createUser, getDonationSum } = require('../db/user.js')
+const { getCampaignByUserID } = require('../db/campaigns.js')
 
 const GET = (req, res) => {
-    let user = req.params.name;
-    if (user)
+    let userId = req.params.userId;
+    if (userId)
     {
-        getUserByName(user).then((users) => {
-            console.log(users);
+        getUserById(userId).then((user) => {
             res.status(200);
-            res.send(users);
+            getDonationSum(user._id).then((value) => {
+                let ret = {
+                    user,
+                    totalDonation: value,
+                }
+                res.send(ret);
+            })
+            
         })
         .catch(e => {
             res.status(500);
@@ -17,7 +24,7 @@ const GET = (req, res) => {
 }
 
 const POST = (req, res) => {
-    createUser(req.body.name, req.body.balance, req.body.roundUp)
+    createUser(req.body.name, req.body.balance, 0)
     .then((user) => {
         console.log(err)
         res.status(200);
@@ -29,4 +36,20 @@ const POST = (req, res) => {
     });
 }
 
-module.exports = { GET, POST };
+const GET_CAMPAIGNS = (req, res) => {
+    let userId = req.params.userId;
+    if (userId)
+    {
+        getCampaignByUserID(userId).then((campaigns) => {
+            res.status(200);
+            res.send(campaigns);            
+        })
+        .catch(e => {
+            res.status(500);
+            res.send(e);
+        });
+    }
+}
+
+
+module.exports = { GET, POST, GET_CAMPAIGNS };

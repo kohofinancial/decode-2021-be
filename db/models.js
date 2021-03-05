@@ -9,7 +9,6 @@ const UserSchema = new mongoose.Schema({
   },
   balance: Number,
   roundUp: Number,
-  campaigns: [{ type: Schema.Types.ObjectId, ref: 'Campaign' }],
   transactions: [{ type: Schema.Types.ObjectId, ref: 'Transaction' }]
 });
 const User = new mongoose.model('User', UserSchema);
@@ -30,7 +29,7 @@ const TransactionSchema = new mongoose.Schema({
   amount: Number,
   type: {
     type: String,
-    enum: ['purchase', 'donation', 'roundup']
+    enum: ['purchase', 'donation', 'roundup', 'roundupCashout']
   }
 });
 const Transaction = new mongoose.model('Transaction', TransactionSchema);

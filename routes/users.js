@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { POST, GET } = require('../controllers/user.js')
+const { POST, GET, GET_CAMPAIGNS } = require('../controllers/user.js')
 
 /**
  * @openapi
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
  *       200:
  *         description: Returns user
  */
- router.get('/:name', GET);
+ router.get('/:userId', GET);
 
 /**
  * @openapi
@@ -50,5 +50,8 @@ router.get('/', (req, res) => {
  *         description: Creates new user
  */
  router.post('/', POST);
+
+
+ router.get('/:userId/campaigns', GET_CAMPAIGNS);
 
 module.exports = router;
