@@ -5,12 +5,15 @@ let Schema = mongoose.Schema;
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    index: { unique: true }
+    unique: true,
   },
   balance: Number,
   roundUp: Number,
+  totalDonated: Number,
   transactions: [{ type: Schema.Types.ObjectId, ref: 'Transaction' }]
+
 });
+UserSchema.index({name:1})
 const User = new mongoose.model('User', UserSchema);
 
 const CampaignSchema = new mongoose.Schema({

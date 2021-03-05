@@ -10,7 +10,14 @@ const createUser = async(name, balance, roundUp) => {
     roundUp,
     transactions: []
   });
-  return user.save();
+  return User.findOne({name: name}).then((userToUpdate) => {
+    console.log("TEST"+ userToUpdate)
+    if (!userToUpdate){
+      return user.save();
+    }else{
+      return userToUpdate
+    }
+  });
 }
 
 const addTransaction = async(id, transaction) => {
