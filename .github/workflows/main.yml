@@ -9,7 +9,9 @@ on:
       - fix/github_action
 
 jobs:
-  build:
+    environment:
+      name: main
+    build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
