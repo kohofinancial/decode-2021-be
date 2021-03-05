@@ -10,7 +10,7 @@ on:
 
 jobs:
     environment:
-      name: main
+    - name: main
     build:
     runs-on: ubuntu-latest
     steps:
