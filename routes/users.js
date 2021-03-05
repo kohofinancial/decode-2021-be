@@ -4,19 +4,6 @@ const { POST, GET, GET_CAMPAIGNS } = require('../controllers/user.js')
 
 /**
  * @openapi
- * /users:
- *   get:
- *     description: Used to get all users
- *     responses:
- *       200:
- *         description: Retuns all campaigns
- */
-router.get('/', (req, res) => {
-    console.log("get users");
-});
-
-/**
- * @openapi
  * /user/{id}:
  *   get:
  *     description: Used to get userID
@@ -52,6 +39,15 @@ router.get('/', (req, res) => {
  router.post('/', POST);
 
 
+ /**
+ * @openapi
+ * /user/:userId/campaigns:
+ *   get:
+ *     description: getting all campaings for a specific user             
+ *     responses:
+ *       200:
+ *         description: return list of campaings
+ */
  router.get('/:userId/campaigns', GET_CAMPAIGNS);
 
 module.exports = router;

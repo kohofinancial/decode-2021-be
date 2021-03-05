@@ -53,13 +53,6 @@ const addTransaction = async(id, transaction) => {
   // TODO: send the money to the charity!
 }
 
-// const addCampaign = async(id, campaign) => {
-//   User.findOne({_id: id}).then((userToUpdate) => {
-//     userToUpdate.campaigns.push(campaign);
-//     userToUpdate.save();
-//   });
-// }
-
 const getDonationSum = async(id) => {
   console.log(id)
   return User.findById(id, 'transactions').populate('transactions').then((collection) => {

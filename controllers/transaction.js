@@ -1,6 +1,6 @@
 const { getTransactionByID, createTransaction } = require('../db/transaction');
 const { addTransaction } = require('../db/user');
-const { addTransactionToCampaign } = require('../db/campaigns');
+const { addTransactionToCampaign,getCampaignByUserID } = require('../db/campaigns');
 
 
 const GET = (req, res) => {
@@ -28,21 +28,28 @@ const POST = (req, res) => {
       if (b.type == 'donation') {
         // Add transaction to campaign
         addTransactionToCampaign(b.campaign, transaction)
+          .then((val) => {
+            res.status(200);
+            res.send("succeeded");
+          });
         
       } else if (amountRundup !== 0) {
         createTransaction(b.userId, b.receiver, b.campaign, amountRundup, "roundup")
         .then((transaction) => {
           console.log(transaction)
           addTransaction(b.userId, transaction)
+          getCampaignByUserID(b.userId).then((campaigns)=>{
+            addTransactionToCampaign(campaigns[0]._id, transaction)
+          }).then((val) => {
+            res.status(200);
+            res.send("succeeded");
+          });             
         })
         .catch(e => {
           res.status(500);
           res.send(e);
         });
       }
-
-      res.status(200);
-      res.send("succeeded");
     })
     .catch(e => {
         res.status(500);

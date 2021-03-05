@@ -9,7 +9,7 @@ const getCampaignByID = async(id) => {
 }
 
 const getCampaignByUserID = async(id) => {
-  return Campaign.find({ userIds: id });
+  return Campaign.find({ userIds: id }).populate("transactions");
 }
 
 const createCampaign = async(name, goalAmount, userId) => {

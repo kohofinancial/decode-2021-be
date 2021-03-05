@@ -4,20 +4,6 @@ const { POST, GET } = require('../controllers/campaign.js')
 
 /**
  * @openapi
- * /campaign:
- *   get:
- *     description: Used to get all charity campaigns
- *     responses:
- *       200:
- *         description: Retuns all campaigns
- */
-router.get('/', (req, res) => {
-    console.log("get all campaigns");
-    res.send("<div>campaigns</div>");
-});
-
-/**
- * @openapi
  * /campaign/{id}:
  *   get:
  *     description: Used to get campaign with given id
