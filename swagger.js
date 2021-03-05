@@ -23,6 +23,9 @@ const options = {
       {
         url: "http://localhost:5000/",
       },
+      {
+        url: "https://decode-be-2021.herokuapp.com/",
+      },
     ],
   },
   apis: ["./routes/*.js"],

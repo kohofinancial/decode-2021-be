@@ -16,13 +16,28 @@ router.get('/campaigns', (req, res) => {
 
 /**
  * @openapi
- * /campaign{id}:
+ * /campaign/{id}:
  *   get:
  *     description: Used to get campaign with given id
  *     parameters:
  *     responses:
  *       200:
- *         description: campaign
+ *         description: ok
+ *         content: 
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          name:
+ *                              type: string
+ *                          goalAmount:
+ *                              type: number
+ *                          currentAmount:
+ *                              type: number
+ *                          users:
+ *                              type: array
+ *                              items:
+ *                                  type: string
  */
  router.get('/campaign:id', (req, res) => {
     console.log("get all campaigns");

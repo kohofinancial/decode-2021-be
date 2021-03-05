@@ -3,16 +3,47 @@ const router = express.Router();
 const fetch = require('node-fetch');
 
 
-router.get('/', (res, req, next) => {
-  res.send("<div>hello from charities :)</div>");
-});
-
-
-// GET /charities (filters: name, category, location(city, province))
-
-// /charities/__
-
-router.get('/search', function(req, res) {
+/**
+ * @openapi
+ * /charities:
+ *   get:
+ *     description: Used to get all charities
+ *     responses:
+ *       200:
+ *         description: Returns all chartities
+ *     parameters:
+ *      - in: query
+ *        name: query
+ *        schema:
+ *          type: string
+ *        description: Searching by query
+ *      - in: query
+ *        name: category
+ *        schema:
+ *          type: string
+ *        description: Searching by category
+ *      - in: query
+ *        name: city
+ *        schema:
+ *          type: string
+ *        description: Searching by city
+ *      - in: query
+ *        name: province
+ *        schema:
+ *          type: string
+ *        description: Searching by Province
+ *      - in: query
+ *        name: offset
+ *        schema:
+ *          type: string
+ *        description: Specify the Offset - pagination
+ *      - in: query
+ *        name: limit
+ *        schema:
+ *          type: string
+ *        description: Specify the limit of element
+ */
+router.get('', function(req, res) {
   console.log('get all charities');
 
   let uri = 'https://www.canadahelps.org/en/search/charities/';
@@ -20,42 +51,38 @@ router.get('/search', function(req, res) {
   if (req.query) uri += '?';
   
   for (const key in req.query) uri += `${key}=${req.query[key]}&`
-
+  
   fetch(uri)
-  .then(body => {
-    res.send(body);
+  .then(resp => {
+      if (resp.ok) return resp.json()
+      else res.status(404)
   })
-  .catch(e => console.log(e));
-});
-
-// GET /charity/:charity_id   (drill down on specific charity)
-
-router.get('/:charity_key', (req, res) => {
-  var uri = 'https://www.canadahelps.org/api/cache/v1/charities/slugname/' ;//+ req.params.charity_key + '?fullCharityDetailsFlag=true';
-
-  fetch(uri)
-  .then(body => {
-    res.send(body);
-  })
+  .then(json => res.json(json))
   .catch(e => console.log(e));
 });
 
 
-// GET /charities/categories (get a list of categories. Need filters?)
-router.get('/categories', (req, res) => {
-  console.log('get categories');
+/**
+ * @openapi
+ * /charities/:slug_name:
+ *   get:
+ *     description: Get charity by slugname
+ *     responses:
+ *       200:
+ *         description: Returns charity with matching slugname
+ */
+router.get('/:slug_name', (req, res) => {
+  console.log('charities get: ' + req.params.slug_name);
+  
+  var uri = 'https://www.canadahelps.org/api/cache/v1/charities/slugname/' + req.params.slug_name + '?fullCharityDetailsFlag=true';
 
-  // GET {key}/search/categories/getcategories
-
-  categories = [
-    'animals', 'arts-culture', 'education',
-    'environment', 'health', 'indigenous-peoples',
-    'international', 'public-benefit', 'religion',
-    'social-services'
-  ]
-  res.json({ 
-    result: categories
-  });
+  fetch(uri)
+  .then(resp => {
+    if (resp.ok) return resp.json()
+    else res.status(404)
+  })
+  .then(json => res.json(json))
+  .catch(e => console.log(e));
 });
 
 module.exports = router;

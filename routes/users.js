@@ -22,7 +22,7 @@ router.get('/user', (req, res) => {
  *     parameters:
  *     responses:
  *       200:
- *         description: Retuns user
+ *         description: Returns user
  */
  router.get('/user:id', (req, res) => {
     console.log("get user");
@@ -42,6 +42,8 @@ router.get('/user', (req, res) => {
  *                          name:
  *                              type: string
  *                          balance:
+ *                              type: number
+ *                          roudUp:
  *                              type: number
  *                      
  *     responses:

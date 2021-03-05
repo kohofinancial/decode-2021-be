@@ -3,34 +3,34 @@ const router = express.Router();
 
 /**
  * @openapi
- * /users:
+ * /transactions:
  *   get:
- *     description: Used to get all users
+ *     description: Used to get all transactions
  *     responses:
  *       200:
  *         description: Retuns all campaigns
  */
-router.get('/user', (req, res) => {
+router.get('/transactions', (req, res) => {
     console.log("get users");
 });
 
 /**
  * @openapi
- * /user/{id}:
+ * /transaction/{id}:
  *   get:
- *     description: Used to get userID
+ *     description: Used to get transaction
  *     parameters:
  *     responses:
  *       200:
  *         description: Retuns user
  */
- router.get('/user:id', (req, res) => {
+ router.get('/transaction:id', (req, res) => {
     console.log("get user");
 });
 
 /**
  * @openapi
- * /user:
+ * /transaction:
  *   post:
  *     description: create a new user
  *     requestBody:
@@ -39,16 +39,20 @@ router.get('/user', (req, res) => {
  *                  schema:
  *                      type: object
  *                      properties:
- *                          name:
+ *                          receiver:
  *                              type: string
- *                          balance:
+ *                          sender:
+ *                              type: string
+ *                          amount:
  *                              type: number
+ *                          type:
+ *                              type: string
  *                      
  *     responses:
  *       200:
  *         description: Creates new user
  */
- router.post('/user', (req, res) => {
+ router.post('/transaction', (req, res) => {
     console.log("create user");
 });
 
