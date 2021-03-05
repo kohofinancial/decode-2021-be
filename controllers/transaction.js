@@ -24,7 +24,7 @@ const POST = (req, res) => {
       console.log(transaction)
       addTransaction(b.userId, transaction)
 
-      amountRundup=((Math.ceil(b.amount / 10) * 10)-b.amount)
+      amountRundup=((Math.ceil(b.amount / 10) * 10)-b.amount).toFixed(2)
       if (b.type == 'donation') {
         // Add transaction to campaign
         addTransactionToCampaign(b.campaign, transaction)
