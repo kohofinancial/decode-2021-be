@@ -23,9 +23,11 @@ const GET = (req, res) => {
 const POST = (req, res) => {
     createUser(req.body.name, req.body.balance, 0)
     .then((user) => {
-        console.log(user)
-        res.status(200);
-        res.send(user);
+        getDonationSum(user._id).then((value) => {
+            user.totalDonated=value   
+            res.status(200);            
+            res.send(user);
+        })
     })
     .catch(e => {
         res.status(500);
