@@ -11,10 +11,14 @@ const createUser = async(name, balance, roundUp) => {
     campaigns: [],
     transactions: []
   });
-  user.save();
+  return user.save();
 }
 
-const getUserByID = async(name) => {
+const getUserByName = async(name) => {
+  return User.find({name: name});
+}
+
+const getRoundUpByName = async(name) => {
   let res = await User.find({name: name});
   if(res.length)
     return res;
@@ -24,5 +28,6 @@ const getUserByID = async(name) => {
 // need to discuss more about what functions are needed
 
 module.exports = {
-  createUser
+  createUser,
+  getUserByName
 }

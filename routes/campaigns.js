@@ -3,15 +3,16 @@ const router = express.Router();
 
 /**
  * @openapi
- * /campaigns:
+ * /campaign:
  *   get:
  *     description: Used to get all charity campaigns
  *     responses:
  *       200:
  *         description: Retuns all campaigns
  */
-router.get('/campaigns', (req, res) => {
+router.get('/', (req, res) => {
     console.log("get all campaigns");
+    res.send("<div>campaigns</div>");
 });
 
 /**
@@ -39,8 +40,9 @@ router.get('/campaigns', (req, res) => {
  *                              items:
  *                                  type: string
  */
- router.get('/campaign:id', (req, res) => {
-    console.log("get all campaigns");
+ router.get('/:id', (req, res) => {
+    console.log("get campaign: " + req.params.id);
+    res.send(`<p>campaign: ${req.params.id}</p>`)
 });
 
 /**
@@ -67,7 +69,7 @@ router.get('/campaigns', (req, res) => {
  *       200:
  *         description: Creats new campaign
  */
-router.post('/campaign', (req, res) => {
+router.post('/', (req, res) => {
     console.log("create campaign");
 });
 

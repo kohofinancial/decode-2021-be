@@ -33,12 +33,11 @@ POST /transaction
 - amount
 - user
 
+# These are all transaction types (single request type for all of them)
 GET /donation:id
-
 POST /donation
 
 GET /roundup
-
 POST /roundup
 
 

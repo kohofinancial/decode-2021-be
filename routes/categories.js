@@ -9,7 +9,7 @@ const fetch = require('node-fetch');
  *     description: Used to get all categories
  *     responses:
  *       200:
- *         description: Retuns all categories
+ *         description: Returns all categories
  */
 router.get('/', (req, res) => {
   console.log('get categories');
