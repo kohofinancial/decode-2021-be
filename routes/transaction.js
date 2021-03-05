@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { POST } = require('../controllers/transaction.js')
+const { POST, GET } = require('../controllers/transaction.js')
 
 /**
  * @openapi
@@ -25,9 +25,7 @@ router.get('/', (req, res) => {
  *       200:
  *         description: Retuns user
  */
-router.get('/:id', (req, res) => {
-    console.log("get user");
-});
+router.get('/:id', GET);
 
 /**
  * @openapi

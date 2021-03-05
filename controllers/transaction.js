@@ -1,4 +1,5 @@
 const { getTransactionByID, createTransaction } = require('../db/transaction');
+const { addTransaction } = require('../db/user');
 
 const GET = (req, res) => {
   // handles GET /api/transactions
@@ -16,8 +17,10 @@ const POST = (req, res) => {
   // handles POST /api/transactions
   let b = req.body;
 
-  createTransaction(b.name, b.goalAmount, b.currentAmount, b.users)
-    .then((err, transaction) => {
+  createTransaction(b.userId, b.receiver, b.campaign, b.amount, b.type)
+    .then((transaction) => {
+        console.log(transaction)
+        addTransaction(b.userId, transaction)
         res.status(200);
         res.send("succeeded");
     })

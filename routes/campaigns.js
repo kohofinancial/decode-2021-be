@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { POST, GET } = require('../controllers/campaign.js')
 
 /**
  * @openapi
@@ -40,10 +41,7 @@ router.get('/', (req, res) => {
  *                              items:
  *                                  type: string
  */
- router.get('/:id', (req, res) => {
-    console.log("get campaign: " + req.params.id);
-    res.send(`<p>campaign: ${req.params.id}</p>`)
-});
+ router.get('/:id', GET);
 
 /**
  * @openapi
@@ -69,8 +67,6 @@ router.get('/', (req, res) => {
  *       200:
  *         description: Creats new campaign
  */
-router.post('/', (req, res) => {
-    console.log("create campaign");
-});
+router.post('/', POST);
 
 module.exports = router;

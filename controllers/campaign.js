@@ -1,4 +1,5 @@
 const { getCampaignByID, createCampaign } = require('../db/campaigns');
+const { addCampaign } = require('../db/user');
 
 const GET = (req, res) => {
   // handles GET /api/campaigns
@@ -14,10 +15,18 @@ const GET = (req, res) => {
 }
 
 const POST = (req, res) => {
-  // handles POST /api/campaigns
-  // creates a new campaign
-  let { name, goalAmount, currentAmount, users } = req.body;
-  
+  createCampaign(req.body.name, req.body.goalAmount, req.body.userId)
+  .then((campaign) => {
+      console.log(campaign)
+      addCampaign(req.body.userId, campaign)
+      res.status(200);
+      res.send("succeeded");
+  })
+  .catch(e => {
+      res.status(500);
+      res.send(e);
+  });
+
 }
 
 module.exports = { GET, POST };

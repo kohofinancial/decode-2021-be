@@ -11,21 +11,17 @@ const getCampaignByID = async(id) => {
   return;
 }
 
-const createCampaign = async(name, goalAmount, currentAmount, users) => {
+const createCampaign = async(name, goalAmount, userId) => {
   // Creates a new campaign
   // returns true if successful
   let campaign = new Campaign({
     name,
     goalAmount,
-    currentAmount,
-    users
+    currentAmount: 0,
+    userIds: [userId],
+    transactions: [],
   });
-
-  return campaign.save((e) => {
-    users.map((name) => {
-      User.findOneAndUpdate({name}, { $push : {campaigns : campaign}});
-    });
-  });
+  return campaign.save();
 }
 
 module.exports = {

@@ -7,8 +7,14 @@ const getTransactionByID = async(id) => {
   return;
 }
 
-const createTransaction = async(sender, reciever, amount, type) => {
-  let transaction = new Transaction({ sender, reciever, amount, type });
+const createTransaction = async(sender, receiver, campaign, amount, type) => {
+  let transaction = new Transaction({
+    sender,
+    receiver,
+    campaign,
+    amount,
+    type
+  });
   return transaction.save();
 }
 

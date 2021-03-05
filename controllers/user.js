@@ -1,14 +1,13 @@
-const { getUserByName, createUser } = require('../db/auth.js')
+const { getUserByName, createUser } = require('../db/user.js')
 
 const GET = (req, res) => {
     let user = req.params.name;
-    console.log(user);
     if (user)
     {
-        getUserByName(user).then((userInfo) => {
-            console.log(userInfo);
+        getUserByName(user).then((users) => {
+            console.log(users);
             res.status(200);
-            res.send(user);
+            res.send(users);
         })
         .catch(e => {
             res.status(500);
@@ -18,7 +17,9 @@ const GET = (req, res) => {
 }
 
 const POST = (req, res) => {
-    createUser(req.body.name, req.body.balance, req.body.roundUp).then((err, transaction) => {
+    createUser(req.body.name, req.body.balance, req.body.roundUp)
+    .then((user) => {
+        console.log(err)
         res.status(200);
         res.send("succeeded");
     })
