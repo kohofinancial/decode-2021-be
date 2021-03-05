@@ -1,4 +1,4 @@
-const { getUserById, createUser, getDonationSum } = require('../db/user.js')
+const { getUserById, createUser, getDonationSum, deleteCampaignByUserID } = require('../db/user.js')
 const { getCampaignByUserID } = require('../db/campaigns.js')
 
 const GET = (req, res) => {
@@ -49,6 +49,7 @@ const GET_CAMPAIGNS = (req, res) => {
         });
     }
 }
+
 
 
 module.exports = { GET, POST, GET_CAMPAIGNS };

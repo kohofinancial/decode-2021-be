@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { POST, GET } = require('../controllers/campaign.js')
+const { POST, GET,DELETE_CAMPAIGNS } = require('../controllers/campaign.js')
 
 /**
  * @openapi
@@ -54,5 +54,7 @@ const { POST, GET } = require('../controllers/campaign.js')
  *         description: Creats new campaign
  */
 router.post('/', POST);
+
+router.delete('/:campaignId', DELETE_CAMPAIGNS);
 
 module.exports = router;

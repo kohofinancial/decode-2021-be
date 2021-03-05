@@ -35,11 +35,16 @@ const addTransactionToCampaign = async(id, transaction) => {
   });
 }
 
+const deleteCampaignById = async(campaignId) => {
+  console.log("YMA"+campaignId)
+  return Campaign.findOneAndDelete({_id: campaignId})
+}
 module.exports = {
   getAllCampaigns,
   getCampaignByUserID,
   getCampaignByID,
   createCampaign,
   addTransactionToCampaign,
+  deleteCampaignById,
 }
 

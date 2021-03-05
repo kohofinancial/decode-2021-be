@@ -1,4 +1,4 @@
-const { getCampaignByID, createCampaign } = require('../db/campaigns');
+const { getCampaignByID, createCampaign,deleteCampaignById } = require('../db/campaigns');
 const { addCampaign } = require('../db/user');
 
 const GET = (req, res) => {
@@ -34,6 +34,21 @@ const POST = (req, res) => {
     res.send(e);
   });
 
+  
 }
 
-module.exports = { GET, POST };
+const DELETE_CAMPAIGNS = (req, res) => {
+  let campaignId = req.params.campaignId;
+  if (campaignId)
+  {
+      deleteCampaignById(campaignId).then((campaigns) => {
+          res.status(200);
+          res.send(campaigns);            
+      })
+      .catch(e => {
+          res.status(500);
+          res.send(e);
+      });
+  }
+}
+module.exports = { GET, POST,DELETE_CAMPAIGNS };
